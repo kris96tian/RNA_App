@@ -12,10 +12,13 @@
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         .container {
             padding-top: 20px;
             max-width: 900px;
+            flex: 1; /* This makes the container grow to fill available space */
         }
         .btn-primary {
             background-color: #4e73df;
@@ -136,6 +139,35 @@
             font-weight: 600;
             letter-spacing: 0.5px;
         }
+        /* Override text-muted for example sequences */
+        .example-sequences {
+            color: white !important;
+        }
+        /* Fancy styling for sequence labels */
+        .fancy-label {
+            color: #1cc88a;
+            font-weight: 900;
+            font-style: italic;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(28, 200, 138, 0.5);
+        }
+        /* Footer Styles */
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto;
+            font-family: 'Poppins', sans-serif;
+        }
+        .footer a {
+            color: #1cc88a;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -144,7 +176,13 @@
     <form id="sequenceForm">
         <div class="mb-3">
             <label for="sequence" class="form-label">Enter RNA Sequence</label>
-            <textarea class="form-control" id="sequence" rows="2" placeholder="Example: AUGCUAGCUAGC"></textarea>
+            <small class="form-text text-muted d-block mb-2 example-sequences">
+                Example sequences:<br>
+                • <span class="fancy-label">Short sequence:</span> GGGAAACCC<br>
+                • <span class="fancy-label">Medium sequence:</span> GGGCUAUUAGCUCAGUU<br>
+                • <span class="fancy-label">tRNA-Molecule:</span> GGGGGUCCGUCGAGUGGUCCGGCGGCUUACUGAAGGGGACCGGUGGGAGGCGGACCGGGAGG
+            </small>
+            <textarea class="form-control" id="sequence" rows="2" placeholder="Enter your RNA sequence here..."></textarea>
         </div>
         <button type="submit" class="btn btn-primary">🔍 Predict Structure</button>
     </form>
@@ -158,6 +196,10 @@
         <div id="base-pairs"></div>
     </div>
 </div>
+
+<footer class="footer">
+    <p>Created by Kristian Alikaj. For more visit <a href="https://github.com/kris96tian">GitHub profile</a>.</p>
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
