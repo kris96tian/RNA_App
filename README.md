@@ -79,11 +79,11 @@ Optimal secondary structure prediction of RNA sequence by **maximizing the numbe
 ### **Mathematical Recurrence**
 The algorithm can be described using the recurrence relation:
 
-$$ dp[i][j] = \max\begin{cases} 
+dp[i][j] = \max\begin{cases} 
 dp[i][j-1] & \text{(Unpaired)} \\
 dp[i+1][j-1] + 1 & \text{(Paired, if } \text{can\_pair(sequence[i], sequence[j])} \text{)} \\
 \max_{k=i+\text{MIN\_LOOP}}^{j-\text{MIN\_LOOP}} (dp[i][k] + dp[k+1][j]) & \text{(Bifurcation)}
-\end{cases} $$
+\end{cases}
 
 ---
 
