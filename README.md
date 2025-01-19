@@ -1,6 +1,9 @@
-# RNA Secondary Structure Predictor
+![image](https://github.com/user-attachments/assets/a56cb5c1-57c0-4f27-ac16-e7267c4dbd1f)# RNA Secondary Structure Predictor
 
-<img src="blob:chrome-untrusted://media-app/7cdcde57-db14-41ef-bd44-69f9502a0617" alt="App Screenshot"/>![image](https://github.com/user-attachments/assets/c512742a-50bc-4a82-9cb0-15f91413680b)
+## Visit Website:
+- https://rna-secondary.streamlit.app/
+
+<img src="blob:chrome-untrusted://media-app/7cdcde57-db14-41ef-bd44-69f9502a0617" />![image](https://github.com/user-attachments/assets/c512742a-50bc-4a82-9cb0-15f91413680b)
 
 
 Interactive tool for the prediction and visualization of RNA secondary structures, using dynamic programming. It predicts base pairing and generates a visual representation of the structure based on the input RNA sequence.
