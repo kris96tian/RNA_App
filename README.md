@@ -79,15 +79,54 @@ Optimal secondary structure prediction of RNA sequence by **maximizing the numbe
 ### **Mathematical Recurrence**
 The algorithm can be described using the recurrence relation:
 
-$$
-\begin{align*}
-dp[i][j] = & \max \begin{cases} 
-dp[i][j-1] & \text{(Unpaired)} \\
-dp[i+1][j-1] + 1 & \text{(Paired, if } \text{can_pair(sequence[i], sequence[j])} \text{)} \\
-\max_{k=i+\text{MIN\_LOOP}}^{j-\text{MIN\_LOOP}} (dp[i][k] + dp[k+1][j]) & \text{(Bifurcation)}
-\end{cases}
-\end{align*}
-$$
+<p>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>dp</mi>
+  <mrow>
+    <mo>[</mo>
+    <mi>i</mi>
+    <mo>]</mo>
+    <mo>[</mo>
+    <mi>j</mi>
+    <mo>]</mo>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <mi>max</mi>
+    <mrow>
+      <mo>{</mo>
+      <mtable columnalign="left">
+        <mtr>
+          <mtd><mi>dp</mi><mrow><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>j</mi><mo>-</mo><mn>1</mn><mo>]</mo></mrow></mtd>
+          <mtd><mtext>(Unpaired)</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mi>dp</mi><mrow><mo>[</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo>]</mo><mo>[</mo><mi>j</mi><mo>-</mo><mn>1</mn><mo>]</mo></mrow><mo>+</mo><mn>1</mn></mtd>
+          <mtd><mtext>(Paired, if can_pair(sequence[i], sequence[j]))</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <munderover>
+              <mo>max</mo>
+              <mrow><mi>k</mi><mo>=</mo><mi>i</mi><mo>+</mo><mi>MIN_LOOP</mi></mrow>
+              <mrow><mi>j</mi><mo>-</mo><mi>MIN_LOOP</mi></mrow>
+            </munderover>
+            <mrow>
+              <mo data-mjx-texclass="INNER">((</mo>
+              <mi>dp</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>[</mo><mi>k</mi><mo>]</mo>
+              <mo>+</mo>
+              <mi>dp</mi><mo>[</mo><mi>k</mi><mo>+</mo><mn>1</mn><mo>]</mo><mo>[</mo><mi>j</mi><mo>]</mo>
+              <mo data-mjx-texclass="INNER">))</mo>
+            </mrow>
+          </mtd>
+          <mtd><mtext>(Bifurcation)</mtext></mtd>
+        </mtr>
+      </mtable>
+      <mo>}</mo>
+    </mrow>
+  </mrow>
+</math>
+</p>
 
 
 ---
