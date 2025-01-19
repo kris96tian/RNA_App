@@ -4,7 +4,9 @@
 
 You can interact with the app by visiting the following link:
 
-[Interactive RNA Secondary Structure App](https://rna-secondary.streamlit.app/?embed_options=dark_theme)
+[FLASK (faster) RNA Secondary Structure App](https://kr1571an.pythonanywhere.com/)
+
+[Streamlit RNA Secondary Structure App](https://rna-secondary.streamlit.app/?embed_options=dark_theme)
 
 
 <img src="blob:chrome-untrusted://media-app/7cdcde57-db14-41ef-bd44-69f9502a0617" />![image](https://github.com/user-attachments/assets/c512742a-50bc-4a82-9cb0-15f91413680b)
