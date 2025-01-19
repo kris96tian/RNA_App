@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RNA Structure Predictor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #2b3035;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+        .container {
+            padding-top: 20px;
+            max-width: 900px;
+        }
+        .btn-primary {
+            background-color: #4e73df;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            margin: 10px 0;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #2e53bf;
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(78, 115, 223, 0.3);
+        }
+        .structure {
+            margin-top: 15px;
+            background: #343a40;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(78, 115, 223, 0.2);
+        }
+        h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #1cc88a;
+            letter-spacing: -0.3px;
+        }
+        .form-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1cc88a;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .form-control {
+            background: #343a40;
+            border: 1px solid #495057;
+            color: #ffffff;
+            border-radius: 8px;
+            font-family: 'Space Grotesk', monospace;
+            letter-spacing: 0.5px;
+        }
+        .form-control:focus {
+            background: #404850;
+            color: #ffffff;
+            border-color: #4e73df;
+            box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.25);
+        }
+        /* Table styles */
+        .table {
+            color: #ffffff !important;
+            background: #343a40;
+            font-size: 14px;
+            margin-top: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            font-family: 'Space Grotesk', monospace;
+            letter-spacing: 0.3px;
+        }
+        .table th {
+            color: #1cc88a !important;
+            border-color: #495057;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            padding: 12px;
+        }
+        .table td {
+            color: #ffffff !important;
+            border-color: #495057;
+            padding: 12px;
+        }
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        .table-striped > tbody > tr:nth-of-type(even) {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .table-striped > tbody > tr:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .table * {
+            color: #ffffff !important;
+        }
+        pre {
+            color: #ffffff;
+            margin: 10px 0;
+            font-size: 14px;
+            font-family: 'Space Grotesk', monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #495057;
+        }
+        strong {
+            color: #1cc88a;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">🧬 RNA Secondary Structure Predictor</h1>
+    <form id="sequenceForm">
+        <div class="mb-3">
+            <label for="sequence" class="form-label">Enter RNA Sequence</label>
+            <textarea class="form-control" id="sequence" rows="2" placeholder="Example: AUGCUAGCUAGC"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">🔍 Predict Structure</button>
+    </form>
+
+    <div id="result" class="structure" style="display: none;">
+        <h3>RNA Secondary Structure Visualization</h3>
+        <div id="structure-plot"></div>
+        
+        <h3>Detailed View</h3>
+        <div id="dot-bracket"></div>
+        <div id="base-pairs"></div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    $("#sequenceForm").submit(function(event) {
+        event.preventDefault();
+        const sequence = $("#sequence").val();
+        $.post("/predict", { sequence: sequence }, function(data) {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                $("#result").show();
+                $("#structure-plot").html(data.fig_html);
+                $("#dot-bracket").html("<strong>Structure:</strong><pre>" + data.dot_bracket + "</pre>");
+                $("#base-pairs").html(data.pairs_html);
+            }
+        });
+    });
+</script>
+</body>
+</html>
