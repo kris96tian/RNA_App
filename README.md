@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/a56cb5c1-57c0-4f27-ac16-e7267c4dbd1f)# RNA Secondary Structure Predictor
+# RNA Secondary Structure Predictor
 
 ## Visit Website:
 - https://rna-secondary.streamlit.app/
