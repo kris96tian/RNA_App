@@ -89,6 +89,7 @@ dp[i+1][j-1] + 1 & \text{(Paired, if } \text{can_pair(sequence[i], sequence[j])}
 \end{align*}
 $$
 
+
 ---
 
 ### **Time Complexity**
