@@ -20,10 +20,10 @@ Interactive tool for the prediction and visualization of RNA secondary structure
 
 ## Libraries 
 
-- **Streamlit (st):**
-- **Pandas:**
-- **Plotly:**
-- **NumPy:**
+- **Streamlit (st)**
+- **Pandas**
+- **Plotly**
+- **NumPy**
 
 ## Workflow
 
