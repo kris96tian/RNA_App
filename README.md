@@ -79,7 +79,13 @@ Optimal secondary structure prediction of RNA sequence by **maximizing the numbe
 ### **Mathematical Recurrence**
 The algorithm can be described using the recurrence relation:
 
-![equation](https://latex.codecogs.com/gif.latex?dp%5Bi%5D%5Bj%5D%20%3D%20%5Cmax%5Cbegin%7Bcases%7D%20dp%5Bi%5D%5Bj-1%5D%20%26%20%5Ctext%7B%28Unpaired%29%7D%20%5C%5C%20dp%5Bi&plus;1%5D%5Bj-1%5D%20&plus;%201%20%26%20%5Ctext%7B%28Paired%2C%20if%20%7D%20%5Ctext%7Bcan%5C_pair%28sequence%5Bi%5D%2C%20sequence%5Bj%5D%29%7D%20%5Ctext%7B%29%7D%20%5C%5C%20%5Cmax_%7Bk%3Di&plus;%5Ctext%7BMIN%5C_LOOP%7D%7D%5E%7Bj-%5Ctext%7BMIN%5C_LOOP%7D%7D%20%28dp%5Bi%5D%5Bk%5D%20&plus;%20dp%5Bk&plus;1%5D%5Bj%5D%29%20%26%20%5Ctext%7B%28Bifurcation%29%7D%20%5Cend%7Bcases%7D)
+$$
+dp[i][j] = \max\begin{cases} 
+dp[i][j-1] & \text{(Unpaired)} \\
+dp[i+1][j-1] + 1 & \text{(Paired, if } \text{can_pair(sequence[i], sequence[j])} \text{)} \\
+\max_{k=i+\text{MIN_LOOP}}^{j-\text{MIN_LOOP}} (dp[i][k] + dp[k+1][j]) & \text{(Bifurcation)}
+\end{cases}
+$$
 ---
 
 ### **Time Complexity**
